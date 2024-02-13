@@ -1,0 +1,23 @@
+.elements__like {
+  width: 23px;
+  height: 23px;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.elements__like::after {
+  content: "";
+  background-image: url(../../../images/like.svg);
+  width: 22px;
+  height: 19px;
+  background-repeat: no-repeat;
+}
+.elements__like:hover {
+  opacity: 0.6;
+}

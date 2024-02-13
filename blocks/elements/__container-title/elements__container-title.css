@@ -1,0 +1,7 @@
+.elements__container-title {
+  padding: 0 15px 0 21px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 79px;
+}

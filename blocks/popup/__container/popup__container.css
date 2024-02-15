@@ -8,3 +8,11 @@
   box-sizing: border-box;
   position: relative;
 }
+
+@media (max-width: 570px) {
+  .popup__container {
+    width: 282px;
+    min-height: 322px;
+    padding: 25px 22px;
+  }
+}

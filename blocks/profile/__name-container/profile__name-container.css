@@ -1,6 +1,7 @@
 .profile__name-container {
   display: flex;
   gap: 18px;
+  width: 100%;
   align-items: center;
   margin-bottom: 16px;
 }

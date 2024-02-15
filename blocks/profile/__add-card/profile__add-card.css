@@ -10,8 +10,11 @@
   align-items: center;
   margin-left: auto;
   cursor: pointer;
+  transition: 0.2s;
 }
-
+.profile__add-card:hover {
+  opacity: 0.6;
+}
 .profile__add-card::after {
   content: "";
   background-image: url(../../../images/plus-btn.svg);

@@ -9,7 +9,9 @@
   align-items: center;
   cursor: pointer;
 }
-
+.profile__edit-info:hover {
+  opacity: 0.6;
+}
 .profile__edit-info::after {
   content: "";
   background-image: url(../../../images/pencil.svg);

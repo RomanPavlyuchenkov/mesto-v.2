@@ -11,3 +11,16 @@
   top: -41px;
   right: -41px;
 }
+.popup__close:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 570px) {
+  .popup__close {
+    width: 21px;
+    height: 21px;
+    background-image: url(../../../images/Close\ Icon-min.svg);
+    top: -37px;
+    right: 0px;
+  }
+}

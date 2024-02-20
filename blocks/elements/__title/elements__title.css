@@ -2,6 +2,7 @@
   font-family: "Inter", sans-serif;
   font-weight: 900;
   font-size: 24px;
+  max-width: 220px;
   color: #000;
   text-overflow: ellipsis;
   white-space: nowrap;

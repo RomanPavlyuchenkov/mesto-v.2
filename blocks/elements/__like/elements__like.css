@@ -1,23 +1,20 @@
 .elements__like {
-  width: 23px;
-  height: 23px;
-  padding: 0;
-  margin: 0;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.elements__like::after {
-  content: "";
-  background-image: url(../../../images/like.svg);
   width: 22px;
   height: 19px;
-  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  padding: 0;
+  border: none;
+  background: transparent;
+  background-image: url(../../../images/like.svg);
+  -webkit-tap-highlight-color: transparent;
 }
+
 .elements__like:hover {
-  opacity: 0.6;
+  opacity: 0.5;
+}
+@media (pointer: coarse) {
+  .elements__like:hover {
+    opacity: 1;
+  }
 }

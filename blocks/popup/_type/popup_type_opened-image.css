@@ -1,0 +1,9 @@
+.popup_type_opened-image {
+  padding: 0 80px;
+}
+
+@media (max-width: 520px) {
+  .popup_type_opened-image {
+    padding: 0 40px;
+  }
+}

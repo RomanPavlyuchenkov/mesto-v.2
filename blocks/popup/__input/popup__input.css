@@ -4,6 +4,7 @@
   width: 358px;
   border-bottom: 1px solid rgb(0, 0, 0, 0.2);
   outline: none;
+  position: relative;
 }
 .popup__input:first-child {
   margin-bottom: 30px;

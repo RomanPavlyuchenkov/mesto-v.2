@@ -35,9 +35,25 @@
       <div class="popup popup_type_edit-profile">
         <div class="popup__container">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="popup__form popup__form_type_edit-profile">
-            <input class="popup__input" id="input-name" type="text" />
-            <input class="popup__input" id="input-job" type="text" />
+          <form class="popup__form popup__form_type_edit-profile" novalidate>
+            <input
+              class="popup__input"
+              id="input-name"
+              type="text"
+              required
+              minlength="2"
+              maxlength="40"
+            />
+            <span class="popup__span-error input-name-error"></span>
+            <input
+              class="popup__input"
+              id="input-job"
+              type="text"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span class="popup__span-error input-job-error"></span>
             <button type="submit" class="popup__button">Сохранить</button>
           </form>
           <button
@@ -50,19 +66,25 @@
       <div class="popup popup_type_add-place">
         <div class="popup__container">
           <h2 class="popup__title">Новое место</h2>
-          <form class="popup__form popup__form_type_add-place">
+          <form class="popup__form popup__form_type_add-place" novalidate>
             <input
               class="popup__input"
               id="input-name-place"
               type="text"
               placeholder="Название"
+              required
+              minlength="2"
+              maxlength="30"
             />
+            <span class="popup__span-error input-name-place-error"></span>
             <input
               class="popup__input"
               id="input-url"
               type="url"
               placeholder="Ссылка на картинку"
+              required
             />
+            <span class="popup__span-error input-url-error"></span>
             <button type="submit" class="popup__button">Сохранить</button>
           </form>
           <button
@@ -93,5 +115,6 @@
     </div>
     <script src="./scripts/elmets-array.js"></script>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>

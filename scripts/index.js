@@ -1,3 +1,4 @@
+//кнопки
 const editProfileButton = document.querySelector(".profile__edit-info");
 const addCardButton = document.querySelector(".profile__add-card");
 const closePopupEditProfile = document.querySelector(
@@ -6,32 +7,38 @@ const closePopupEditProfile = document.querySelector(
 const closePopupAddCard = document.querySelector(
   ".popup__close_type_add-place"
 );
+//Поля на странице
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
+//Попапы
 const popup = document.querySelector(".popup");
 const popupEditProfile = document.querySelector(".popup_type_edit-profile");
-const popupAddPlace = document.querySelector(".popup_type_add-place");
 const formElementEditProfile = popupEditProfile.querySelector(
   ".popup__form_type_edit-profile"
 );
 const nameInput = formElementEditProfile.querySelector("#input-name");
 const jobInput = formElementEditProfile.querySelector("#input-job");
+const popupAddPlace = document.querySelector(".popup_type_add-place");
 const formElementAddplace = popupAddPlace.querySelector(
   ".popup__form_type_add-place"
 );
 const namePlaceInput = popupAddPlace.querySelector("#input-name-place");
 const urlInput = popupAddPlace.querySelector("#input-url");
-const elmentsContainer = document.querySelector(".elements");
 const popupOpenedImage = document.querySelector(".popup_type_opened-image");
 const closePopupOpenedImage = popupOpenedImage.querySelector(
   ".popup__close_type_opened-image"
 );
+const elmentsContainer = document.querySelector(".elements");
+const popupList = Array.from(document.querySelectorAll(".popup"));
 // открытие попапа
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closePopupEsc);
+  document.addEventListener("click", closePopupOverlay);
 }
 editProfileButton.addEventListener("click", () => {
   openPopup(popupEditProfile);
+
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 });
@@ -41,16 +48,36 @@ addCardButton.addEventListener("click", () => {
 // закрытие попа
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closePopupEsc);
+  document.removeEventListener("click", closePopupOverlay);
 }
-closePopupEditProfile.addEventListener("click", () => {
+//закрытие попапа на оверлей
+function closePopupOverlay(evt) {
+  if (evt.target.classList.contains("popup_opened")) {
+    popupList.forEach((popup) => {
+      closePopup(popup);
+    });
+  }
+}
+//закрытие попапа на Esc
+function closePopupEsc(evt) {
+  if (evt.key === "Escape") {
+    popupList.forEach((popup) => {
+      closePopup(popup);
+    });
+  }
+}
+closePopupEditProfile.addEventListener("click", (evt) => {
   closePopup(popupEditProfile);
+  closePopupOverlay(evt, popupEditProfile);
+  console.log(evt);
 });
 closePopupAddCard.addEventListener("click", () => {
   closePopup(popupAddPlace);
+  urlInput.value = "";
+  namePlaceInput.value = "";
 });
-closePopupOpenedImage.addEventListener("click", () => {
-  closePopup(popupOpenedImage);
-});
+
 //Обработчик отправки формы
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
@@ -74,6 +101,8 @@ function handleFormSubmitCard(evt) {
   };
   createCard(newPlace);
   closePopup(popupAddPlace);
+  urlInput.value = "";
+  namePlaceInput.value = "";
 }
 
 function createCard(card) {
@@ -98,12 +127,15 @@ function createCard(card) {
     .addEventListener("click", (evt) => {
       evt.target.parentElement.remove();
     });
-  //открытие попапа  с картинкой
+  //открытие и закрытие попапа  с картинкой
   cardImg.addEventListener("click", () => {
-    popupOpenedImage.classList.add("popup_opened");
+    openPopup(popupOpenedImage);
     popupOpenedImage.querySelector(".popup__image").src = card.link;
     popupOpenedImage.querySelector(".popup__image").alt = card.name;
     popupOpenedImage.querySelector(".popup__text").textContent = card.name;
+  });
+  closePopupOpenedImage.addEventListener("click", () => {
+    closePopup(popupOpenedImage);
   });
   renderCard(cardElement);
 }

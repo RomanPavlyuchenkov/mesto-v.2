@@ -1,3 +1,6 @@
+import Card from "./Card.js";
+import { enableValidation, initialElements } from "./elements-array.js";
+
 //кнопки
 const editProfileButton = document.querySelector(".profile__edit-info");
 const addCardButton = document.querySelector(".profile__add-card");
@@ -24,14 +27,17 @@ const formElementAddplace = popupAddPlace.querySelector(
 );
 const namePlaceInput = popupAddPlace.querySelector("#input-name-place");
 const urlInput = popupAddPlace.querySelector("#input-url");
-const popupOpenedImage = document.querySelector(".popup_type_opened-image");
-const closePopupOpenedImage = popupOpenedImage.querySelector(
+export const popupOpenedImage = document.querySelector(
+  ".popup_type_opened-image"
+);
+export const closePopupOpenedImage = popupOpenedImage.querySelector(
   ".popup__close_type_opened-image"
 );
 const elmentsContainer = document.querySelector(".elements");
+
 const popupList = Array.from(document.querySelectorAll(".popup"));
 // открытие попапа
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupEsc);
   document.addEventListener("click", closePopupOverlay);
@@ -46,7 +52,7 @@ addCardButton.addEventListener("click", () => {
   openPopup(popupAddPlace);
 });
 // закрытие попа
-function closePopup(popup) {
+export function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupEsc);
   document.removeEventListener("click", closePopupOverlay);
@@ -88,7 +94,29 @@ function handleFormSubmitProfile(evt) {
 formElementEditProfile.addEventListener("submit", handleFormSubmitProfile);
 
 ///////////////////////Добавляем карточки на страницу
-initialCards.reverse().forEach((element) => {
+initialElements.reverse().forEach((element) => {
+  renderCard(element);
+});
+formElementAddplace.addEventListener("submit", handleFormSubmitCard);
+function handleFormSubmitCard(evt) {
+  evt.preventDefault();
+  const newPlace = {
+    name: namePlaceInput.value,
+    link: urlInput.value,
+  };
+  renderCard(newPlace);
+  closePopup(popupAddPlace);
+  urlInput.value = "";
+  namePlaceInput.value = "";
+}
+
+function renderCard(element) {
+  const card = new Card(element, ".template-elements");
+  const newCard = card.createCard();
+  elmentsContainer.prepend(newCard);
+}
+
+/* initialCards.reverse().forEach((element) => {
   createCard(element);
 });
 
@@ -142,4 +170,4 @@ function createCard(card) {
 
 function renderCard(card) {
   elmentsContainer.prepend(card);
-}
+} */

@@ -25,7 +25,7 @@
 /* footer */
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copiright/footer__copiright.css);
-@import url(../blocks/footer/_fixed/footer_fixed.css);
+
 /* pop-up */
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);

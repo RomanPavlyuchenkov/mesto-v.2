@@ -77,7 +77,6 @@ function closePopupEsc(evt) {
 closePopupEditProfile.addEventListener("click", (evt) => {
   closePopup(popupEditProfile);
   closePopupOverlay(evt, popupEditProfile);
-  console.log(evt);
 });
 closePopupAddCard.addEventListener("click", () => {
   closePopup(popupAddPlace);

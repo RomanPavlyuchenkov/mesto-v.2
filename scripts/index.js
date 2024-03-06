@@ -123,58 +123,9 @@ const validationEditprofile = new FormValidator(
   ".popup__form_type_edit-profile"
 );
 validationEditprofile.enableValidation();
-/* initialCards.reverse().forEach((element) => {
-  createCard(element);
-});
 
-formElementAddplace.addEventListener("submit", handleFormSubmitCard);
-function handleFormSubmitCard(evt) {
-  evt.preventDefault();
-  const newPlace = {
-    name: namePlaceInput.value,
-    link: urlInput.value,
-  };
-  createCard(newPlace);
-  closePopup(popupAddPlace);
-  urlInput.value = "";
-  namePlaceInput.value = "";
-}
-
-function createCard(card) {
-  const cardTemplate = document.querySelector(".template-elements").content;
-  const cardElement = cardTemplate
-    .querySelector(".elements__element")
-    .cloneNode(true);
-  const cardImg = cardElement.querySelector(".elements__image");
-  const cardName = cardElement.querySelector(".elements__title");
-  cardImg.src = card.link;
-  cardImg.alt = card.name;
-  cardName.textContent = card.name;
-  //обработчик лайка
-  cardElement
-    .querySelector(".elements__like")
-    .addEventListener("click", (evt) => {
-      evt.target.classList.toggle("elements__like_active");
-    });
-  //удаление карточки
-  cardElement
-    .querySelector(".elements__delete")
-    .addEventListener("click", (evt) => {
-      evt.target.parentElement.remove();
-    });
-  //открытие и закрытие попапа  с картинкой
-  cardImg.addEventListener("click", () => {
-    openPopup(popupOpenedImage);
-    popupOpenedImage.querySelector(".popup__image").src = card.link;
-    popupOpenedImage.querySelector(".popup__image").alt = card.name;
-    popupOpenedImage.querySelector(".popup__text").textContent = card.name;
-  });
-  closePopupOpenedImage.addEventListener("click", () => {
-    closePopup(popupOpenedImage);
-  });
-  renderCard(cardElement);
-}
-
-function renderCard(card) {
-  elmentsContainer.prepend(card);
-} */
+const validationAddCard = new FormValidator(
+  enableValidation,
+  ".popup__form_type_add-place"
+);
+validationAddCard.enableValidation();

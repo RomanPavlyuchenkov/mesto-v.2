@@ -1,4 +1,5 @@
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 import { enableValidation, initialElements } from "./elements-array.js";
 
 //кнопки
@@ -116,6 +117,12 @@ function renderCard(element) {
   elmentsContainer.prepend(newCard);
 }
 
+//Валидация форм
+const validationEditprofile = new FormValidator(
+  enableValidation,
+  ".popup__form_type_edit-profile"
+);
+validationEditprofile.enableValidation();
 /* initialCards.reverse().forEach((element) => {
   createCard(element);
 });

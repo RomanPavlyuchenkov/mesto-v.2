@@ -1,12 +1,7 @@
-import {
-  popupOpenedImage,
-  closePopupOpenedImage,
-  openPopup,
-  closePopup,
-} from "./index.js";
 export default class Card {
-  constructor(config, templateSelector) {
+  constructor(config, templateSelector, handleCardClick) {
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
     this._name = config.name;
     this._link = config.link;
   }
@@ -30,6 +25,7 @@ export default class Card {
     this._handleDeleteCard();
     this._handleClickLike();
     this._handleClickImage();
+
     return this._element;
   }
   _handleDeleteCard() {
@@ -47,13 +43,7 @@ export default class Card {
   _handleClickImage() {
     const img = this._element.querySelector(".elements__image");
     img.addEventListener("click", () => {
-      openPopup(popupOpenedImage);
-      popupOpenedImage.querySelector(".popup__image").src = this._link;
-      popupOpenedImage.querySelector(".popup__image").alt = this._name;
-      popupOpenedImage.querySelector(".popup__text").textContent = this._name;
-    });
-    closePopupOpenedImage.addEventListener("click", () => {
-      closePopup(popupOpenedImage);
+      this._handleCardClick(this._link, this._name);
     });
   }
 }

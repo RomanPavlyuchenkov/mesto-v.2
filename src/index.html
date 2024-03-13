@@ -4,17 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Место</title>
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body>
     <div class="page">
       <!--  header -->
       <header class="header">
-        <img class="header__logo" src="./images/logo.svg" alt="logo" />
+        <img
+          class="header__logo"
+          src="<%=require('./images/logo.svg')%>"
+          alt="logo"
+        />
       </header>
       <!-- profile -->
       <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.jpg" alt="avatar" />
+        <img
+          class="profile__avatar"
+          src="<%=require('./images/avatar.jpg')%>"
+          alt="avatar"
+        />
         <div class="profile__info">
           <div class="profile__name-container">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -39,6 +46,7 @@
             <input
               class="popup__input"
               id="input-name"
+              name="name"
               type="text"
               required
               minlength="2"
@@ -48,6 +56,7 @@
             <input
               class="popup__input"
               id="input-job"
+              name="info"
               type="text"
               required
               minlength="2"
@@ -71,6 +80,7 @@
               class="popup__input"
               id="input-name-place"
               type="text"
+              name="name"
               placeholder="Название"
               required
               minlength="2"
@@ -80,6 +90,7 @@
             <input
               class="popup__input"
               id="input-url"
+              name="link"
               type="url"
               placeholder="Ссылка на картинку"
               required
@@ -97,7 +108,7 @@
       <div class="popup popup_type_opened-image">
         <div class="popup__container-image">
           <img class="popup__image" src="" alt="#" />
-          <p class="popup__text">fefdfd</p>
+          <p class="popup__text"></p>
           <button class="popup__close popup__close_type_opened-image"></button>
         </div>
       </div>
@@ -113,6 +124,5 @@
         </div>
       </template>
     </div>
-    <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>

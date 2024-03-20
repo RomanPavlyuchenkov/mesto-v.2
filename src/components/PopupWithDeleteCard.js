@@ -1,18 +1,16 @@
-import Popup from "./Popup";
+import PopupWithForm from "./PopupWithForm";
 
-export default class PopupWithDeleteCard extends Popup {
-  constructor(_popupSelector, handleFormSubmit) {
+export default class PopupWithDeleteCard extends PopupWithForm {
+  constructor(_popupSelector) {
     super(_popupSelector);
-    this._form = this._popupSelector.querySelector(".popup__form");
-    this._handleFomSubmit = handleFormSubmit;
   }
-
-  setEventListeners(card) {
-    super.setEventListeners();
-
-    this._form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      this._handleFomSubmit(card);
-    });
+  //При открытии попапа с удалением карточки мы записали функцию
+  /* () => {
+  apiCardDelete(card);
+} */
+  // в this._handleFormSubmit из класаса PopupWithForm и метод setEventListeners выполняет теперь новую функцию
+  open(onSubmit) {
+    super.open();
+    this._handleFormSubmit = onSubmit;
   }
 }

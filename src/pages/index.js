@@ -82,21 +82,24 @@ const renderer = (element) => {
     myId,
     (card) => {
       /////////Удаляем карточку
-      popupWithDeleteCard.open();
-      popupWithDeleteCard.setEventListeners(card);
+      popupWithDeleteCard.open(() => {
+        apiCardDelete(card);
+      });
     }
   );
   const newCard = card.createCard();
   renderCard.addItem(newCard);
 };
-
+const renderCard = new Section(renderer, ".elements");
+//Попап с удалением карточки
 const popupWithDeleteCard = new PopupWithDeleteCard(
   ".popup_type_delete-card",
-  handleDeleteCard
+  apiCardDelete
 );
+popupWithDeleteCard.setEventListeners();
 
 //Api удалить карточку
-function handleDeleteCard(card) {
+function apiCardDelete(card) {
   api
     .deleteCard(card._id)
     .then(() => {
@@ -107,8 +110,6 @@ function handleDeleteCard(card) {
     })
     .catch((err) => console.log(`catch: ${err}`));
 }
-
-const renderCard = new Section(renderer, ".elements");
 
 //попап с открытым изображением
 const openPopupWithImage = new PopupWithImage(".popup_type_opened-image");

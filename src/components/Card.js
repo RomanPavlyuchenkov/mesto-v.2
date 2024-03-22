@@ -4,7 +4,8 @@ export default class Card {
     templateSelector,
     handleCardClick,
     myId,
-    handleDeleteCard
+    handleDeleteCard,
+    handlelike
   ) {
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -14,7 +15,9 @@ export default class Card {
     this._ownerId = config.owner._id;
     this._myId = myId._id;
     this._id = config._id;
+    this._likes = config.likes;
     this._handleDeleteCard = handleDeleteCard;
+    this._handlelike = handlelike;
   }
   _getTemplate() {
     const templeateElements = document.querySelector(
@@ -30,17 +33,20 @@ export default class Card {
     this._element = this._getTemplate();
     this._cardImg = this._element.querySelector(".elements__image");
     this._cardName = this._element.querySelector(".elements__title");
-    this._likes = this._element.querySelector(
+    this._countLikes = this._element.querySelector(
       ".elements__like-container span "
     );
     this._buttonDelete = this._element.querySelector(".elements__delete");
-    this._likes.textContent = this._likes.length;
+    this._buttonLike = this._element.querySelector(".elements__like");
+    this._img = this._element.querySelector(".elements__image");
+    this._countLikes.textContent = this._likes.length;
     this._cardImg.src = this._link;
     this._cardImg.alt = this._name;
     this._cardName.textContent = this._name;
     this._initDeleteCard();
     this._handleClickLike();
     this._handleClickImage();
+    this.updateLikes(this._likes);
 
     return this._element;
   }
@@ -57,14 +63,19 @@ export default class Card {
     });
   }
   _handleClickLike() {
-    const buttonLike = this._element.querySelector(".elements__like");
-    buttonLike.addEventListener("click", (evt) => {
-      evt.target.classList.toggle("elements__like_active");
+    this._buttonLike.addEventListener("click", () => {
+      this._handlelike(this);
     });
   }
+
+  updateLikes(likes) {
+    this._likes = likes;
+    this.isLiked = this._likes.some((like) => like._id === this._myId);
+    this._buttonLike.classList.toggle("elements__like_active", this.isLiked);
+    this._countLikes.textContent = this._likes.length;
+  }
   _handleClickImage() {
-    const img = this._element.querySelector(".elements__image");
-    img.addEventListener("click", () => {
+    this._img.addEventListener("click", () => {
       this._handleCardClick(this._link, this._name);
     });
   }

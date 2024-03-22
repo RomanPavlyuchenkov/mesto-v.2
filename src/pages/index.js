@@ -79,12 +79,24 @@ const renderer = (element) => {
     (src, text) => {
       openPopupWithImage.open(src, text);
     },
-    myId,
+    myId, /////////Удаляем карточку
     (card) => {
-      /////////Удаляем карточку
       popupWithDeleteCard.open(() => {
         apiCardDelete(card);
       });
+    }, ////////Обработчик лайков
+    (card) => {
+      if (card.isLiked) {
+        api
+          .deleteLike(card._id)
+          .then((data) => card.updateLikes(data.likes))
+          .catch((err) => console.log(`catch: ${err}`));
+      } else {
+        api
+          .addLike(card._id)
+          .then((data) => card.updateLikes(data.likes))
+          .catch((err) => console.log(`catch: ${err}`));
+      }
     }
   );
   const newCard = card.createCard();

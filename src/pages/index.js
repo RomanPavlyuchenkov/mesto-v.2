@@ -11,6 +11,7 @@ import {
   nameInput,
   jobInput,
   enableValidation,
+  avatarButton,
 } from "../utils/constants.js";
 
 import Api from "../components/Api.js";
@@ -34,10 +35,26 @@ Promise.all([
   })
   .catch((err) => console.log(`catch: ${err}`));
 
+//Попап обновить аватар
+const popupUpadateAvatar = new PopupWithForm(
+  ".popup_type_update-avatar",
+  (newAvatar) => {
+    api
+      .updateAvatar(newAvatar)
+      .then((newAvatar) => userInfoOnPage.updateAvatar(newAvatar))
+      .then(popupUpadateAvatar.close())
+      .catch((err) => console.log(`catch: ${err}`));
+  }
+);
+popupUpadateAvatar.setEventListeners();
+avatarButton.addEventListener("click", () => {
+  popupUpadateAvatar.open();
+});
 //Попап с информацией о пользователе
 const userInfoOnPage = new UserInfo({
   name: ".profile__name",
   about: ".profile__job",
+  avatar: ".profile__avatar-img",
 });
 const popupWithProfileInfo = new PopupWithForm(
   ".popup_type_edit-profile",
@@ -139,3 +156,9 @@ const validationAddCard = new FormValidator(
   ".popup__form_type_add-place"
 );
 validationAddCard.enableValidation();
+
+const validationUpdateAvatar = new FormValidator(
+  enableValidation,
+  ".popup__form_type_update-avatar"
+);
+validationUpdateAvatar.enableValidation();

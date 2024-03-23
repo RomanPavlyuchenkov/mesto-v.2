@@ -7,6 +7,7 @@ const formElementEditProfile = popupEditProfile.querySelector(
 );
 export const nameInput = formElementEditProfile.querySelector("#input-name");
 export const jobInput = formElementEditProfile.querySelector("#input-job");
+export const avatarButton = document.querySelector(".profile__avatar");
 export const enableValidation = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",

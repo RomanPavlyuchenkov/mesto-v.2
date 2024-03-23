@@ -17,11 +17,11 @@
       </header>
       <!-- profile -->
       <section class="profile">
-        <img
-          class="profile__avatar"
-          src="<%=require('./images/avatar.jpg')%>"
-          alt="avatar"
-        />
+        <div class="profile__avatar">
+          <img class="profile__avatar-img" src="" alt="avatar" />
+          <div class="profile__avatar-hover"></div>
+        </div>
+
         <div class="profile__info">
           <div class="profile__name-container">
             <h1 class="profile__name"></h1>
@@ -124,6 +124,25 @@
             </button>
           </form>
           <button class="popup__close popup__close_type_opened-image"></button>
+        </div>
+      </div>
+      <!--   Попап обновить аватар -->
+      <div class="popup popup_type_update-avatar">
+        <div class="popup__container_type_update-avatar popup__container">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form class="popup__form popup__form_type_update-avatar" novalidate>
+            <input
+              class="popup__input popup__input_type_update-avatar"
+              id="input-url"
+              name="avatar"
+              type="url"
+              placeholder="Ссылка на картинку"
+              required
+            />
+            <span class="popup__span-error input-url-error"></span>
+            <button type="submit" class="popup__button">Сохранить</button>
+          </form>
+          <button class="popup__close" type="button"></button>
         </div>
       </div>
       <!--   тимплейт -->

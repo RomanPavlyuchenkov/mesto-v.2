@@ -1,7 +1,9 @@
 export default class FormValidator {
   constructor(config, formSelector) {
     this._formSelector = document.querySelector(formSelector);
-    this._inputSelector = config.inputSelector;
+    this._inputList = Array.from(
+      this._formSelector.querySelectorAll(config.inputSelector)
+    );
     this._submitButtonSelector = this._formSelector.querySelector(
       config.submitButtonSelector
     );
@@ -15,14 +17,11 @@ export default class FormValidator {
     this._setEventListeners();
   }
   _setEventListeners() {
-    const inputList = Array.from(
-      this._formSelector.querySelectorAll(this._inputSelector)
-    );
-    this._toggleButtonState(inputList);
-    inputList.forEach((inputElement) => {
+    this._toggleButtonState(this._inputList);
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputList);
+        this._toggleButtonState(this._inputList);
       });
     });
   }

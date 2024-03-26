@@ -13,7 +13,7 @@ import {
   enableValidation,
   avatarButton,
 } from "../utils/constants.js";
-
+import { renderLoading } from "../utils/utils.js";
 import Api from "../components/Api.js";
 import PopupWithDeleteCard from "../components/PopupWithDeleteCard.js";
 const api = new Api({
@@ -39,11 +39,15 @@ Promise.all([
 const popupUpadateAvatar = new PopupWithForm(
   ".popup_type_update-avatar",
   (newAvatar) => {
+    renderLoading(".popup_type_update-avatar", true);
     api
       .updateAvatar(newAvatar)
       .then((newAvatar) => userInfoOnPage.updateAvatar(newAvatar))
       .then(popupUpadateAvatar.close())
-      .catch((err) => console.log(`catch: ${err}`));
+      .catch((err) => console.log(`catch: ${err}`))
+      .finally(() => {
+        renderLoading(".popup_type_update-avatar", false);
+      });
   }
 );
 popupUpadateAvatar.setEventListeners();
@@ -59,12 +63,15 @@ const userInfoOnPage = new UserInfo({
 const popupWithProfileInfo = new PopupWithForm(
   ".popup_type_edit-profile",
   (info) => {
+    renderLoading(".popup_type_edit-profile", true);
     api
       .updateUserInfo(info)
       .then((info) => userInfoOnPage.setUserInfo(info))
-      .catch((err) => console.log(`catch: ${err}`));
-
-    popupWithProfileInfo.close();
+      .then(popupWithProfileInfo.close())
+      .catch((err) => console.log(`catch: ${err}`))
+      .finally(() => {
+        renderLoading(".popup_type_edit-profile", false);
+      });
   }
 );
 editProfileButton.addEventListener("click", () => {
@@ -74,14 +81,18 @@ editProfileButton.addEventListener("click", () => {
   popupWithProfileInfo.open();
 });
 popupWithProfileInfo.setEventListeners();
+
 //попап с добавленем карточек
 const popupWithCard = new PopupWithForm(".popup_type_add-place", (item) => {
+  renderLoading(".popup_type_add-place", true);
   api
     .postCard(item)
     .then((item) => renderer(item))
-    .catch((err) => console.log(`catch: ${err}`));
-
-  popupWithCard.close();
+    .then(popupWithCard.close())
+    .catch((err) => console.log(`catch: ${err}`))
+    .finally(() => {
+      renderLoading(".popup_type_add-place", false, "Создать");
+    });
 });
 popupWithCard.setEventListeners();
 addCardButton.addEventListener("click", () => {
